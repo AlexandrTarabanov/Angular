@@ -1,0 +1,10 @@
+<ul>
+  <div *ngFor="let post of postsArray">
+    <li *ngIf="post.title.length < 10"> <!-- Если что, у всех постов длинна title более 10 :) -->
+    <p>Id: {{post.id}}</p>
+    <p>UserId: {{post.userId}}</p>
+    <h5>Title: {{post.title}}</h5>
+    <p>Body: {{post.body}}</p>
+    </li>
+  </div>
+</ul>
