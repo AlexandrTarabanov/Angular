@@ -1,0 +1,8 @@
+<div class="completed">
+  <div *ngIf="completedTodos.length > 0; else placeholder">
+    <app-todo-item *ngFor="let todo of completedTodos" [todo]="todo"></app-todo-item>
+  </div>
+  <ng-template #placeholder>
+    <p>None Todo have completed yet...</p>
+  </ng-template>
+</div>

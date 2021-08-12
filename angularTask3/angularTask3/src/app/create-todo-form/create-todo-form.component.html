@@ -1,0 +1,19 @@
+<div>
+  <form action="" [formGroup]="todoForm" (ngSubmit)="submit()">
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input class="form-control" type="text" formControlName="name">
+      <label class="form-label">Description</label>
+      <input class="form-control" type="text" formControlName="description">
+      <label class="form-label">Tasks</label>
+      <div formGroupName="tasks">
+        <div *ngFor="let task of getControls(); let i = index">
+          <label> Task {{i}}</label>
+          <input class="form-control" type="text" [formControlName]="i">
+        </div>
+      </div>
+    </div>
+    <input class="btn btn-primary" type="button" value="Add task" (click)="addTask()">
+    <button class="btn btn-primary" type="submit" [disabled]="todoForm.invalid">Create</button>
+  </form>
+</div>

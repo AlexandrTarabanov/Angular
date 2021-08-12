@@ -1,0 +1,8 @@
+<div>
+  <div *ngIf="activeTodos.length > 0; else placeholder">
+    <app-todo-item *ngFor="let todo of activeTodos" [todo]="todo"></app-todo-item>
+  </div>
+  <ng-template #placeholder>
+    <p>Active Todo have not opened yet...</p>
+  </ng-template>
+</div>
