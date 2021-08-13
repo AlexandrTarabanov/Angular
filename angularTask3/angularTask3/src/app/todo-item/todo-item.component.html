@@ -3,17 +3,17 @@
     <h4 class="card-title">{{todo.name}}</h4>
     <p class="card-text">{{todo.description}}</p>
     <hr>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngFor="let task of todo.tasks; let i=index">
-        <input type="checkbox" id="checkTask-{{ i + task.task }}" (change)="makeDone(task.isDone?true:false)"
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let task of todo.tasks; let i = index">
+        <input type="checkbox" id="checkTask-{{ i + task.task }}" (change)="makeDone(task.isDone)"
                [(ngModel)]="task.isDone" [disabled]="todo.isCompleted">
         <label> {{task.task}} </label>
       </li>
     </ul>
-    <div class="active-section-button" *ngIf="!todo.isCompleted; else delete">
+    <div *ngIf="!todo.isCompleted; else delete">
       <button class="btn btn-primary" [disabled]="!todo.isChecked" (click)="onMakeCompleted()">Closed</button>
     </div>
-    <ng-template class="close-section-button" #delete>
+    <ng-template #delete>
       <button type="button" class="btn btn-primary" (click)="onTodoDeleted()">Delete</button>
     </ng-template>
   </div>

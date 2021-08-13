@@ -27,7 +27,6 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
     NgbModule,
     AppRoutingModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,7 +8,7 @@
       <label class="form-label">Tasks</label>
       <div formGroupName="tasks">
         <div *ngFor="let task of getControls(); let i = index">
-          <label> Task {{i}}</label>
+          <label> Task {{i + 1}}</label>
           <input class="form-control" type="text" [formControlName]="i">
         </div>
       </div>

@@ -8,6 +8,7 @@ import {Todo} from "../interfaces/todo";
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
+
   public todos: Todo[] = [];
   public activeTodos: Todo[] = [];
 
@@ -15,10 +16,11 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.todoService.todo$().subscribe((res) => {
-      this.todos = res;
-      this.activeTodos = this.todos.filter((todo) => !todo.isCompleted);
+    this.todoService.todo$().subscribe({
+      next: (todosData) => {
+        this.todos = todosData;
+        this.activeTodos = this.todos.filter((todo) => !todo.isCompleted);
+      }
     })
   }
-
 }

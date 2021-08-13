@@ -12,14 +12,14 @@ export class CompletedTodoComponent implements OnInit {
   public todos: Todo[] = [];
   public completedTodos: Todo[] = [];
 
-  constructor(public todoService: TodoService) {
-  }
+  constructor(public todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.todoService.todo$().subscribe((res) => {
-      this.todos = res;
-      this.completedTodos = this.todos.filter((todo) => todo.isCompleted);
+    this.todoService.todo$().subscribe({
+      next: (todosData) => {
+        this.todos = todosData;
+        this.completedTodos = this.todos.filter((todo) => todo.isCompleted);
+      }
     });
   }
-
 }

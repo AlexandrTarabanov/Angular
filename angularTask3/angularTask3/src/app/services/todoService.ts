@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {Todo} from "../interfaces/todo";
 import {BehaviorSubject, Observable} from "rxjs";
 
-
 @Injectable({
   providedIn: 'root',
 })
-export class TodoService {
-  todoSubject: BehaviorSubject<Todo[]> = new BehaviorSubject<Todo[]>([]);
 
-  todo$(): Observable<Todo[]> {
+export class TodoService {
+  private todoSubject: BehaviorSubject<Todo[]> = new BehaviorSubject<Todo[]>([]);
+
+  public todo$(): Observable<Todo[]> {
     return this.todoSubject.asObservable();
   }
 
@@ -30,6 +30,6 @@ export class TodoService {
 
   public deleteTodo(todoName: string): void {
     const todos: Todo[] = this.todoSubject.getValue();
-    this.todoSubject.next(todos.filter(todo => todo.name !== todoName))
+    this.todoSubject.next(todos.filter(todo => todo.name !== todoName));
   }
 }

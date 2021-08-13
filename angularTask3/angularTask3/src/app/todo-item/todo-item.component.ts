@@ -8,7 +8,8 @@ import {TodoService} from "../services/todoService";
   styleUrls: ['./todo-item.component.css']
 })
 export class TodoItemComponent implements OnInit {
-  @Input() todo!: Todo
+
+  @Input() todo!: Todo;
 
   constructor(public todoService: TodoService) {}
 
@@ -16,11 +17,11 @@ export class TodoItemComponent implements OnInit {
 
   }
 
-  public makeDone(value: boolean): void {
-    const nonecompleted = this.todo.tasks.find((task) => !task.isDone);
-    if (!nonecompleted) {
+  public makeDone(isDone: boolean): void {
+    const noneCompleted = this.todo.tasks.find((task) => !task.isDone);
+    if (!noneCompleted) {
       this.todo.isChecked = true;
-    } else this.todo.isChecked = false;
+    }
   }
 
   public onMakeCompleted(): void {
@@ -28,7 +29,7 @@ export class TodoItemComponent implements OnInit {
   }
 
   public onTodoDeleted(): void {
-    this.todoService.deleteTodo(this.todo.name)
+    this.todoService.deleteTodo(this.todo.name);
   }
 
 }

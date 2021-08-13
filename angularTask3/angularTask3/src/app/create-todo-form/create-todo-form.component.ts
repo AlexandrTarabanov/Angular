@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, FormArray, Validators} from "@angular/forms";
-import {Todo} from "../interfaces/todo";
+import {Component, OnInit} from '@angular/core';
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TodoService} from "../services/todoService";
 
 @Component({
@@ -10,7 +9,7 @@ import {TodoService} from "../services/todoService";
 })
 export class CreateTodoFormComponent implements OnInit {
 
-  public todoForm!: FormGroup
+  public todoForm!: FormGroup;
 
   constructor(private todoService: TodoService) {}
 
@@ -21,22 +20,22 @@ export class CreateTodoFormComponent implements OnInit {
       tasks: new FormArray([new FormControl('', [Validators.required])])
     })
   }
-  public prepareTasks(): void {
-    const tasksArr = this.todoForm.value.tasks;
-    const newTasksArr = tasksArr.map((task: string) => ({ isDone: false, task: task }));
-    this.todoForm.value.tasks = newTasksArr;
-  }
-  public submit() {
-    const formData = this.todoForm.value
-    this.prepareTasks()
-    const createdTodo = {...formData, isChecked:false, isCompleted: false}
-    this.todoService.createTodo(createdTodo)
-    this.todoForm.reset()
+
+
+  public backFormToInitial(): void {
+    this.todoForm.reset();
     const tasksFormArray = <FormArray>this.todoForm.controls.tasks;
     while(tasksFormArray.length>1) {
-      tasksFormArray.removeAt(1)
+      tasksFormArray.removeAt(1);
     }
+  }
 
+  public submit() {
+    const formData = this.todoForm.value;
+    let createdTodo = {...formData, isChecked:false, isCompleted: false};
+    createdTodo.tasks = createdTodo.tasks.map((task: string) => ({isDone: false, task: task}));
+    this.todoService.createTodo(createdTodo);
+    this.backFormToInitial();
   }
 
   public addTask(){

@@ -1,7 +1,9 @@
+import {Task} from "./task";
+
 export interface Todo {
   name: string
   description?: string
-  tasks: [{ isDone: boolean, task: string }]
+  tasks: [Task]
   isChecked: boolean
   isCompleted: boolean
 }
